@@ -1,4 +1,5 @@
 import {ArcRotateCamera, Engine, Scene, Vector3} from "@babylonjs/core";
+import {StarfieldProceduralTexture} from "@babylonjs/procedural-textures";
 
 export class StartScene extends Scene{
     public environment;
@@ -26,6 +27,7 @@ export class StartScene extends Scene{
     }
 
     private _setupEnvironment(scene: Scene) {
+        const starfieldPT = new StarfieldProceduralTexture('starfieldPT', 512, scene);
         return null;
     }
 
