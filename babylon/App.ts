@@ -1,16 +1,18 @@
-import {ArcRotateCamera, Engine, MeshBuilder, Scene, Vector3} from "@babylonjs/core";
+import {Engine, Scene} from "@babylonjs/core";
+import {StartScene} from "~/babylon/StartScene";
 
 export class App {
-    constructor() {
-        const canvas = <HTMLCanvasElement> document.getElementById('babylonApp');
-        const engine = new Engine(canvas);
-        const scene = new Scene(engine);
-        const camera = new ArcRotateCamera('camera', Math.PI / 4, Math.PI / 4, 5, Vector3.Zero(), scene);
-        camera.attachControl(canvas, true);
-        MeshBuilder.CreateGround('ground', { width: 3, height: 3 }, scene);
+    private readonly _canvas: HTMLCanvasElement;
+    private readonly _engine: Engine;
+    private _scene: Scene;
 
-        engine.runRenderLoop(() => {
-            scene.render();
+    constructor() {
+        this._canvas = <HTMLCanvasElement> document.getElementById('babylonApp');
+        this._engine = new Engine(this._canvas);
+        this._scene = new StartScene(this._engine);
+
+        this._engine.runRenderLoop(() => {
+            this._scene.render();
         })
     }
 }
