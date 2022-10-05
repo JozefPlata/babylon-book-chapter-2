@@ -1,25 +1,39 @@
 <template>
-  <canvas id="babylonApp"></canvas>
+  <div class="babylon-container">
+    <canvas id="babylonApp" class="babylon-app"></canvas>
+  </div>
 </template>
 
 <script setup lang="ts">
 import {onMounted} from "#imports";
-import {ArcRotateCamera, Engine, MeshBuilder, Scene, Vector3} from "@babylonjs/core";
+import {App} from "~/babylon/App";
 
 onMounted(() => {
-  const canvas = <HTMLCanvasElement> document.getElementById('babylonApp');
-  const engine = new Engine(canvas);
-  const scene = new Scene(engine);
-  const camera = new ArcRotateCamera('camera', Math.PI / 4, Math.PI / 4, 5, Vector3.Zero(), scene);
-  camera.attachControl(canvas, true);
-  MeshBuilder.CreateGround('ground', { width: 3, height: 3 }, scene);
-
-  engine.runRenderLoop(() => {
-    scene.render();
-  })
+  new App();
 })
 </script>
 
 <style scoped>
+.babylon-container {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  display: block;
+}
 
+.babylon-app {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: unset;
+  border: none !important;
+  outline: none !important;
+  touch-action: none;
+}
 </style>
